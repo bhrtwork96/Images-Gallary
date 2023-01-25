@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="d-flex justify-content-between">
+        <p>
+            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
+                Upload
+            </a>
+            <% if(error) {%>
+                <p>
+                    <%= error %>
+                </p>
+                <%}%>
+        </p>
+        <p>
+            <a href= "/logout" class="btn btn-primary">Logout</a>
+        </p>
+    </div>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body w-50">
+            <form action="/upload" enctype="multipart/form-data" method="post">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Upload Image</label>
+                    <input class="form-control" type="file" name="file" id="formFile">
+                </div>
+                <div class="mb-3">
+                    <input type="submit" value="Upload">
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap border">
+
+        <% data.map((e)=>{ %>
+            <a href="/view/<%= e._id %> ">
+                <div class="card mx-3 mb-3 border" style="width: 26vw;">
+                    <figure>
+                        <img src="<%= e.imgurl %> " class="card-img-top" alt="..." style="width: 25vw; height: 25vw;">
+                        <figcaption>
+                            <%= new Date(e.date).toLocaleDateString('en-us', { weekday:"long", year:"numeric",
+                                month:"short", day:"numeric"}) %>
+                        </figcaption>
+                    </figure>
+                </div>
+            </a>
+            <% }) %>
+    </div>
+
+</div>
